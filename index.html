@@ -4,40 +4,48 @@
     <script>
         async function updateCounter() {
             try {
-                const response = await fetch('https://count.helpserver.dpdns.org/', {
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    }
-                });
+                const response = await fetch('https://count.helpserver.dpdns.org/?t=' + Date.now());
+                if (!response.ok) throw new Error('HTTP error ' + response.status);
+                
                 const data = await response.json();
-                console.log(data);
-                document.getElementById('counter').textContent = data.count;
+                
+                // 更新SVG中的计数
+                const counterTexts = document.querySelectorAll('#counter-text');
+                counterTexts.forEach(el => {
+                    el.textContent = data.count;
+                    el.style.fontFamily = 'DejaVu Sans, Verdana, Geneva, sans-serif';
+                });
+                
             } catch (error) {
                 console.error('加载失败:', error);
+                document.querySelectorAll('#counter-text').forEach(el => {
+                    el.textContent = 'ERR';
+                });
             }
         }
         window.onload = updateCounter;
     </script>
 </head>
+<body>
     <svg xmlns="http://www.w3.org/2000/svg" width="110.2" height="20">
-  <linearGradient id="b" x2="0" y2="100%">
-      <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>
-      <stop offset="1" stop-opacity=".1"/>
-  </linearGradient>
-  <mask id="a">
-      <rect width="110.2" height="20" rx="3" fill="#fff"/>
-  </mask>
-  <g mask="url(#a)">
-      <rect width="79.2" height="20" fill="#555"/>
-      <rect x="79.2" width="31" height="20" fill="#007ec6"/>
-      <rect width="110.2" height="20" fill="url(#b)"/>
-  </g>
-  <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">
-      <text x="40.6" y="15" fill="#010101" fill-opacity=".3">Profile views</text>
-      <text x="40.6" y="14">Profile views</text>
-      <text x="93.7" y="15" fill="#010101" fill-opacity=".3" id='counter'>${count}</text>
-      <text x="93.7" y="14" id='counter'>${count}</text>
-  </g>
-  </svg>
+        <linearGradient id="b" x2="0" y2="100%">
+            <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>
+            <stop offset="1" stop-opacity=".1"/>
+        </linearGradient>
+        <mask id="a">
+            <rect width="110.2" height="20" rx="3" fill="#fff"/>
+        </mask>
+        <g mask="url(#a)">
+            <rect width="79.2" height="20" fill="#555"/>
+            <rect x="79.2" width="31" height="20" fill="#007ec6"/>
+            <rect width="110.2" height="20" fill="url(#b)"/>
+        </g>
+        <g fill="#fff" text-anchor="middle" font-size="11">
+            <text x="40.6" y="15" fill="#010101" fill-opacity=".3">Profile views</text>
+            <text x="40.6" y="14">Profile views</text>
+            <text x="93.7" y="15" fill="#010101" fill-opacity=".3" class="counter-text"></text>
+            <text x="93.7" y="14" id="counter-text"></text>
+        </g>
+    </svg>
+</body>
 </html>
