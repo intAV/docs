@@ -6,10 +6,9 @@
         async function updateCounter() {
             try {
                 const response = await fetch('https://count.helpserver.dpdns.org/', {
-                    method: 'GET',
+                    method: 'OPTIONS',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Password': 'key123'  // 固定密码
                     }
                 });
                 const data = await response.json();
