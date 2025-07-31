@@ -18,19 +18,5 @@
     <div class="badge-container">
         <img id="counter-badge" src="https://count.helpserver.dpdns.org/" alt="访问统计">
     </div>
-    
-    <script>
-        // 每隔10秒刷新计数器
-        function refreshBadge() {
-            const badge = document.getElementById('counter-badge');
-            badge.src = badge.src.split('?')[0] + '?t=' + Date.now();
-        }
-        
-        // 初始加载和定时刷新
-        window.onload = function() {
-            refreshBadge();
-            setInterval(refreshBadge, 10000);
-        };
-    </script>
 </body>
 </html>
