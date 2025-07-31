@@ -9,6 +9,12 @@
             margin: 0 auto;
             padding: 20px;
         }
+        .counter {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin: 20px 0;
+        }
         .info-container {
             margin-top: 20px;
             padding: 15px;
@@ -31,16 +37,20 @@
                 });
                 const data = await response.json();
                 
-                // 更新访问信息
-                document.getElementById('ip').textContent = data.ip;
-                document.getElementById('browser').textContent = data.browser;
-                document.getElementById('os').textContent = data.os;
-                document.getElementById('device').textContent = data.device;
-                document.getElementById('time').textContent = data.time;
+                // 更新计数器
+                document.getElementById('counter').textContent = data.count;
+                
+                // 更新客户端信息
+                const info = data.clientInfo;
+                document.getElementById('ip').textContent = info.ip;
+                document.getElementById('browser').textContent = info.browser;
+                document.getElementById('os').textContent = info.os;
+                document.getElementById('device').textContent = info.device;
+                document.getElementById('time').textContent = `${info.time} ${info.timezone}`;
                 
             } catch (error) {
                 console.error('加载失败:', error);
-                document.getElementById('counter-error').textContent = '数据加载失败，请刷新重试';
+                document.getElementById('error').textContent = '数据加载失败，请刷新重试';
             }
         }
         window.onload = updateCounter;
@@ -48,6 +58,7 @@
 </head>
 <body>
     <h1>访问统计</h1>
+    <div class="counter">总访问量: <span id="counter">0</span></div>
     <div class="info-container">
         <div class="info-item"><strong>IP地址:</strong> <span id="ip">加载中...</span></div>
         <div class="info-item"><strong>浏览器:</strong> <span id="browser">加载中...</span></div>
@@ -55,6 +66,6 @@
         <div class="info-item"><strong>设备类型:</strong> <span id="device">加载中...</span></div>
         <div class="info-item"><strong>访问时间:</strong> <span id="time">加载中...</span></div>
     </div>
-    <div id="counter-error" style="color: red;"></div>
+    <div id="error" style="color: red;"></div>
 </body>
 </html>
