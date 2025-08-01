@@ -57,17 +57,18 @@
       container.innerHTML = "";
 
       data.slice(0, 10).forEach(entry => {
-        const div = document.createElement("div");
-        div.className = "record";
-
-        div.innerHTML = `
-          <div class="time">🕒 ${entry.time || entry.bjTime || '未知时间'}</div>
-          <div class="meta">
-            🌍 IP: ${entry.ip} ｜ 📍 城市: ${typeof entry.city2 === 'object' ? entry.city2.city : entry.city2 || entry.city || 'Unknown'}<br>
-            💻 设备: ${entry.device} ｜ 🧠 系统: ${entry.os} ｜ 🌐 浏览器: ${entry.browser}
-          </div>
-        `;
-        container.appendChild(div);
+      const div = document.createElement("div");
+      div.className = "record";
+    
+      div.innerHTML = `
+        <div class="time">🕒 ${entry.time || entry.bjTime || '未知时间'}</div>
+        <div class="meta">
+          🌍 IP: ${entry.ip}<br>
+          📍 城市: ${entry.ipinfo?.city || 'Unknown'} ｜ 🏢 ISP: ${entry.ipinfo?.isp || 'Unknown'} ｜ 🏬 Org: ${entry.ipinfo?.org || 'Unknown'}<br>
+          💻 设备: ${entry.device} ｜ 🧠 系统: ${entry.os} ｜ 🌐 浏览器: ${entry.browser}
+        </div>
+      `;
+      container.appendChild(div);
       });
     }
 
