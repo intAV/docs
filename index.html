@@ -9,19 +9,14 @@
       background: #f5f5f5;
       margin: 2em;
       color: #333;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      text-align: center;
     }
 
     h1 {
-      text-align: center;
       margin-bottom: 1em;
     }
 
     #records {
-      width: 100%;
-      max-width: 600px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -34,7 +29,8 @@
       padding: 12px 18px;
       margin-bottom: 10px;
       width: 100%;
-      text-align: center;
+      max-width: 600px;
+      text-align: left; /* 内容内部左对齐 */
     }
 
     .time {
@@ -63,6 +59,7 @@
       data.slice(0, 10).forEach(entry => {
         const div = document.createElement("div");
         div.className = "record";
+
         div.innerHTML = `
           <div class="time">🕒 ${entry.time || entry.bjTime || '未知时间'}</div>
           <div class="meta">
