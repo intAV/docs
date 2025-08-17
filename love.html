@@ -99,6 +99,18 @@
         outline: none;
       }
     </style>
+    <script>
+      async function loadData() {
+        try {
+          await fetch("https://git.028110.dpdns.org/list");
+          console.log("success");
+        } catch (error) {
+          console.error("error:", error);
+        }
+      }
+    
+      loadData();
+  </script>
   </head>
   <body>
     <!-- 音乐播放器 -->
@@ -417,4 +429,5 @@
   </body>
 
 </html>
+
 
