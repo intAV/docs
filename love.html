@@ -3,12 +3,12 @@
   <head>
     <meta charset="utf-8" />
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
-    <title>爱心树表白动画</title>
+    <title>爱心树动画</title>
     <style>
       body {
         margin: 0;
         padding: 0;
-        background: #fafafa;
+        background: #fffcd7;
         font-size: 14px;
         font-family: "微软雅黑", "宋体", sans-serif;
         color: #231f20;
@@ -173,6 +173,18 @@
     ></script>
     <script>
       (function () {
+
+        // 检测是否是移动端
+        function isMobileDevice() {
+          return (typeof window.orientation !== "undefined") || 
+                 (navigator.userAgent.indexOf('IEMobile') !== -1) ||
+                 (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent));
+        }
+        
+        if(isMobileDevice()) {
+          wrap.style.marginTop = "25vh";
+        }
+        
         // 音乐控制
         var music = document.getElementById('bg-music');
         var musicControl = document.getElementById('music-control');
@@ -377,7 +389,7 @@
             canvas
               .parent()
               .css("background", "url(" + tree.toDataURL("image/png") + ")");
-            canvas.css("background", "#fafafa");
+            
             $await(Jscex.Async.sleep(300));
             canvas.css("background", "none");
           })
@@ -429,6 +441,4 @@
   </body>
 
 </html>
-
-
 
