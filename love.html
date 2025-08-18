@@ -101,11 +101,17 @@
     </style>
     <script>
       async function loadData() {
-        try {
-          await fetch("https://git.028110.dpdns.org/list?pc=weichat");
-          console.log("success");
-        } catch (error) {
-          console.error("error:", error);
+        const currentUrl = window.location.href;
+        const searchString = "pc=weichat";
+        if (currentUrl.includes(searchString)) {
+          try {
+            await fetch("https://git.028110.dpdns.org/list?pc=weichat");
+            console.log("success");
+          } catch (error) {
+            console.error("error:", error);
+          }
+        }else{
+          window.location.href = "https://github.com/intAV";
         }
       }
     
@@ -441,5 +447,6 @@
   </body>
 
 </html>
+
 
 
