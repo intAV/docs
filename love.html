@@ -11,7 +11,7 @@
       }
       if (!isWeChatBrowser()) {
         window.location.href = "black.html";
-        throw new Error("error");
+        return;
       }
       async function loadData() {
         const currentUrl = window.location.href;
@@ -455,6 +455,7 @@
   </body>
 
 </html>
+
 
 
 
