@@ -5,20 +5,13 @@
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
     <title>爱心树动画</title>
     <script>
-    const pause = (ms) => new Promise(resolve => setTimeout(resolve, ms));
     (async function checkWeChatEnvironment() {
       const ua = navigator.userAgent;
       const isWeChat = /micromessenger/i.test(ua);
   
       if (!isWeChat) {
-        console.log("❌ Not WeChat browser");
-        console.log("User-Agent:", ua);
-        await pause(300000);
+        alert("No")
         window.location.href = "black.html";
-      } else {
-        console.log("✅ OK micromessenger");
-        console.log("User-Agent:", ua);
-        await pause(300000);
       }
     })();
     async function loadData() {
@@ -463,6 +456,7 @@
   </body>
 
 </html>
+
 
 
 
