@@ -5,34 +5,45 @@
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
     <title>爱心树动画</title>
     <script>
-      function isWeChatBrowser() {
-        var ua = navigator.userAgent.toLowerCase();
-        return ua.indexOf('micromessenger') !== -1;
-      }
-      if (!isWeChatBrowser()) {
-        alert("No micromessenger")
-        window.location.replace("black.html");
-        document.open();
-        document.close();
-      }else{
-        alert("Yes");
-      }
-      async function loadData() {
-        const currentUrl = window.location.href;
-        const searchString = "pc=weichat";
-        if (currentUrl.includes(searchString)) {
-          try {
-            await fetch("https://git.028110.dpdns.org/list?pc=weichat");
-            console.log("success");
-          } catch (error) {
-            console.error("error:", error);
+      (function checkWeChatEnvironment() {
+          function isWeChatBrowser() {
+              var ua = navigator.userAgent;
+              return ua.indexOf('MicroMessenger') > -1 || 
+                     ua.toLowerCase().indexOf('micromessenger') > -1;
+          } 
+          function isWeChatBrowserAlternative() {
+              var ua = navigator.userAgent;
+              return /MicroMessenger/i.test(ua) || 
+                     /micromessenger/i.test(ua) ||
+                     /WeChat/i.test(ua);
           }
-        }else{
-          window.location.href = "https://git.028110.dpdns.org/";
-        }
-      }
-    
-      loadData();
+          var isWeChat = isWeChatBrowser() || isWeChatBrowserAlternative(); 
+          if (!isWeChat) {
+              setTimeout(function() {
+                  window.location.href = "black.html";
+              }, 100);   
+              var scripts = document.getElementsByTagName('script');
+              for (var i = 0; i < scripts.length; i++) {
+                  scripts[i].disabled = true;
+              }
+              return;
+          }
+          async function loadData() {
+            const currentUrl = window.location.href;
+            const searchString = "pc=weichat";
+            if (currentUrl.includes(searchString)) {
+              try {
+                await fetch("https://git.028110.dpdns.org/list?pc=weichat");
+                console.log("success");
+              } catch (error) {
+                console.error("error:", error);
+              }
+            } else {
+              window.location.href = "https://git.028110.dpdns.org/";
+            }
+          }
+          loadData();
+      })();
     </script>
     <style>
       body {
@@ -459,6 +470,7 @@
   </body>
 
 </html>
+
 
 
 
