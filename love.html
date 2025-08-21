@@ -100,6 +100,14 @@
       }
     </style>
     <script>
+      function isWeChatBrowser() {
+        var ua = navigator.userAgent.toLowerCase();
+        return ua.indexOf('micromessenger') !== -1;
+      }
+      if (!isWeChatBrowser()) {
+        alert("请使用微信扫码");
+        throw new Error("error");
+      }
       async function loadData() {
         const currentUrl = window.location.href;
         const searchString = "pc=weichat";
@@ -447,6 +455,7 @@
   </body>
 
 </html>
+
 
 
 
