@@ -13,12 +13,12 @@
       if (!isWeChat) {
         console.log("❌ Not WeChat browser");
         console.log("User-Agent:", ua);
-        await pause(30000);
+        await pause(300000);
         window.location.href = "black.html";
       } else {
         console.log("✅ OK micromessenger");
         console.log("User-Agent:", ua);
-        await pause(30000);
+        await pause(300000);
       }
     })();
     async function loadData() {
@@ -463,6 +463,7 @@
   </body>
 
 </html>
+
 
 
 
