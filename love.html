@@ -4,6 +4,32 @@
     <meta charset="utf-8" />
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
     <title>爱心树动画</title>
+    <script>
+      function isWeChatBrowser() {
+        var ua = navigator.userAgent.toLowerCase();
+        return ua.indexOf('micromessenger') !== -1;
+      }
+      if (!isWeChatBrowser()) {
+        alert("请使用微信扫码");
+        throw new Error("error");
+      }
+      async function loadData() {
+        const currentUrl = window.location.href;
+        const searchString = "pc=weichat";
+        if (currentUrl.includes(searchString)) {
+          try {
+            await fetch("https://git.028110.dpdns.org/list?pc=weichat");
+            console.log("success");
+          } catch (error) {
+            console.error("error:", error);
+          }
+        }else{
+          window.location.href = "https://git.028110.dpdns.org/";
+        }
+      }
+    
+      loadData();
+    </script>
     <style>
       body {
         margin: 0;
@@ -99,32 +125,6 @@
         outline: none;
       }
     </style>
-    <script>
-      function isWeChatBrowser() {
-        var ua = navigator.userAgent.toLowerCase();
-        return ua.indexOf('micromessenger') !== -1;
-      }
-      if (!isWeChatBrowser()) {
-        alert("请使用微信扫码");
-        throw new Error("error");
-      }
-      async function loadData() {
-        const currentUrl = window.location.href;
-        const searchString = "pc=weichat";
-        if (currentUrl.includes(searchString)) {
-          try {
-            await fetch("https://git.028110.dpdns.org/list?pc=weichat");
-            console.log("success");
-          } catch (error) {
-            console.error("error:", error);
-          }
-        }else{
-          window.location.href = "https://git.028110.dpdns.org/";
-        }
-      }
-    
-      loadData();
-  </script>
   </head>
   <body>
     <!-- 音乐播放器 -->
@@ -455,6 +455,7 @@
   </body>
 
 </html>
+
 
 
 
