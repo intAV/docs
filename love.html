@@ -11,6 +11,18 @@
       }
       if (!isWeChatBrowser()) {
         alert("请使用微信扫码");
+        document.open();
+        document.write(`
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <title>请使用微信扫码</title>
+            </head>
+            <body>
+            </body>
+            </html>
+        `);
+        document.close();
         throw new Error("error");
       }
       async function loadData() {
@@ -455,6 +467,7 @@
   </body>
 
 </html>
+
 
 
 
